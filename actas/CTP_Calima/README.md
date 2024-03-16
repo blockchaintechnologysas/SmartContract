@@ -1,4 +1,32 @@
-# contrato AuthorizedVPS y CTP_Calima:
+Direccion: https://explorer.scolcoin.com/address/0x45D32551890263bA67a64fC97Fc9688224eaCb99/transactions
+
+# Municipio Calima Darien - Primer Consejo Territorial (CTP) Municipal con Almacenamiento de Actas en Blockchain
+
+¡Bienvenidos al Consejo Territorial del Municipio Calima Darien, donde la transparencia y la eficiencia se unen a través de la tecnología Blockchain!
+
+## Descripción
+
+El Consejo Territorial es un espacio de participación ciudadana donde se toman decisiones cruciales para el desarrollo local y la mejora de la calidad de vida de sus habitantes. En este contexto, el Municipio Calima Darien ha marcado un hito histórico al convertirse en el primer municipio en implementar la tecnología Blockchain para almacenar y consultar públicamente sus Actas.
+
+## ¿Qué hace este CTP especial?
+
+Este Consejo Territorial marca la diferencia al adoptar tecnología de vanguardia para asegurar la transparencia y accesibilidad de sus procesos. A través de un Contrato Inteligente (Smart Contract) basado en la tecnología Blockchain, todas las Actas se almacenan de manera segura y descentralizada, garantizando su integridad y evitando alteraciones. Además, cualquier persona puede consultarlas en tiempo real desde nuestro portal web oficial.
+
+## Acceso a las Actas
+
+Para acceder a las Actas del Consejo Territorial, simplemente visita nuestro [portal web oficial](#) y encuentra un enlace directo al registro de Actas del CTP. Desde cualquier dispositivo con conexión a internet, podrás acceder a la información de manera rápida y transparente.
+
+## Participa
+
+Te invitamos a formar parte de este emocionante avance hacia la transparencia y la participación ciudadana. Únete al CTP y sé parte del cambio en el Municipio Calima Darien. Descubre un nuevo estándar de gobierno abierto y participativo, respaldado por la tecnología Blockchain.
+
+## Repositorio en GitHub
+
+Para más detalles sobre la implementación del Contrato Inteligente (Smart Contract) y el código utilizado, visita nuestro repositorio en GitHub: [CTP_Calima - Blockchain Actas](https://github.com/blockchaintechnologysas/SmartContract/tree/main/actas/CTP_Calima)
+
+Explorador: https://explorer.scolcoin.com/address/0x45D32551890263bA67a64fC97Fc9688224eaCb99/read-contract 
+
+#Documento Tecnico contrato AuthorizedVPS y CTP_Calima:
 
 ### Contract AuthorizedVPS
 Este contrato permite la gestión de VPS (Servidores Privados Virtuales) autorizadas para interactuar con el sistema.
