@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // File: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.5.0/contracts/utils/structs/EnumerableSet.sol
-
+//pragma solidity ^0.8.7 direccion: 0x45D32551890263bA67a64fC97Fc9688224eaCb99 opt 5000
 
 // OpenZeppelin Contracts v4.4.1 (utils/structs/EnumerableSet.sol)
 
