@@ -14,11 +14,11 @@ Este Consejo Territorial marca la diferencia al adoptar tecnología de vanguardi
 
 ## Acceso a las Actas
 
-Para acceder a las Actas del Consejo Territorial, simplemente visita nuestro [portal web oficial](#) y encuentra un enlace directo al registro de Actas del CTP. Desde cualquier dispositivo con conexión a internet, podrás acceder a la información de manera rápida y transparente.
+Para acceder a las Actas del Consejo Territorial, simplemente visita nuestro [Github](https://github.com/blockchaintechnologysas/SmartContract/blob/main/actas/CTP_Calima/README.md) y encuentra un enlace directo al registro de Actas del CTP. Desde cualquier dispositivo con conexión a internet, podrás acceder a la información de manera rápida y transparente.
 
 ## Participa
 
-Te invitamos a formar parte de este emocionante avance hacia la transparencia y la participación ciudadana. Únete al CTP y sé parte del cambio en el Municipio Calima Darien. Descubre un nuevo estándar de gobierno abierto y participativo, respaldado por la tecnología Blockchain.
+Te invitamos a formar parte de este emocionante avance hacia la transparencia y la participación ciudadana. Sé parte del cambio en el Municipio Calima Darien, Valle del Cauca. Descubre un nuevo estándar de gobierno abierto y participativo, respaldado por la tecnología Blockchain.
 
 ## Repositorio en GitHub
 
