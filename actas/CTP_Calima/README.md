@@ -26,14 +26,14 @@ Para más detalles sobre la implementación del Contrato Inteligente (Smart Cont
 
 Explorador: https://explorer.scolcoin.com/address/0x45D32551890263bA67a64fC97Fc9688224eaCb99/read-contract 
 
-#Documento Tecnico contrato AuthorizedVPS y CTP_Calima:
+# Documento Tecnico contrato AuthorizedVPS y CTP_Calima:
 
 ### Contract AuthorizedVPS
 Este contrato permite la gestión de VPS (Servidores Privados Virtuales) autorizadas para interactuar con el sistema.
 
 ### Modificadores
-
 onlyAuthorizedVPS: Restringe el acceso a ciertas funciones solo a las VPS autorizadas.
+
 ### Eventos
 
 VPSAuthorized: Emitido cuando se autoriza o desautoriza una VPS. Contiene la dirección de la VPS y su estado de autorización.
@@ -48,9 +48,11 @@ VPSAuthorized: Emitido cuando se autoriza o desautoriza una VPS. Contiene la dir
 # Contract CTP_Calima
 Este contrato permite la gestión de actas CTP Calima, con restricciones de acceso para garantizar que solo las VPS autorizadas puedan ingresar actas.
 
-Structs
+# Structs
 Acta: Estructura de datos que representa una acta CTP Calima.
-Eventos
+
+# Eventos
 ActaIngresada: Emitido cuando se ingresa una nueva acta. Contiene el número de acta, la fecha, el lugar y la dirección del remitente.
-Funciones
+
+# Funciones
 ingresarActa(uint256 _acta, string memory _fecha, string memory _hora, string memory _lugar, string memory _ciudad, string memory _presidente, string memory _secretario, string memory _URI): Permite ingresar una nueva acta CTP Calima. Solo puede ser llamada por las VPS autorizadas.
