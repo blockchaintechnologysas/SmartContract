@@ -22,7 +22,7 @@ Te invitamos a formar parte de este emocionante avance hacia la transparencia y 
 
 ## Repositorio en GitHub
 
-Para más detalles sobre la implementación del Contrato Inteligente (Smart Contract) y el código utilizado, visita nuestro repositorio en GitHub: [CTP_Calima - Blockchain Actas](https://github.com/blockchaintechnologysas/SmartContract/tree/main/actas/CTP_Calima)
+Para más detalles sobre la implementación del Contrato Inteligente (Smart Contract) y el código utilizado, visita nuestro repositorio en GitHub: [CTP_Calima - Blockchain Oficios](https://github.com/blockchaintechnologysas/SmartContract/tree/main/oficios/CTP_Calima)
 
 Explorador: https://explorer.scolcoin.com/address/0x45D32551890263bA67a64fC97Fc9688224eaCb99/read-contract 
 
