@@ -1,4 +1,5 @@
-Direccion: https://explorer.scolcoin.com/address/0x23a0F7e8c333992dA037FD88d97CE87851CCAA0D/transactions
+Direccion: 0x23a0F7e8c333992dA037FD88d97CE87851CCAA0D
+https://explorer.scolcoin.com/address/0x23a0F7e8c333992dA037FD88d97CE87851CCAA0D/transactions
 
 # Municipio Calima Darien - Primer Consejo Territorial (CTP) Municipal con Almacenamiento de Actas en Blockchain
 
@@ -24,7 +25,7 @@ Te invitamos a formar parte de este emocionante avance hacia la transparencia y 
 
 Para más detalles sobre la implementación del Contrato Inteligente (Smart Contract) y el código utilizado, visita nuestro repositorio en GitHub: [CTP_Calima - Blockchain Oficios](https://github.com/blockchaintechnologysas/SmartContract/tree/main/oficios/CTP_Calima)
 
-Explorador: https://explorer.scolcoin.com/address/0x45D32551890263bA67a64fC97Fc9688224eaCb99/read-contract 
+Explorador: https://explorer.scolcoin.com/address/0x23a0F7e8c333992dA037FD88d97CE87851CCAA0D/read-contract 
 
 # Documento Técnico Contrato AuthorizedVPS y CTP_Calima
 
