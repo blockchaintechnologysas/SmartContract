@@ -12,9 +12,9 @@ El Consejo Territorial es un espacio de participación ciudadana donde se toman 
 
 Este Consejo Territorial marca la diferencia al adoptar tecnología de vanguardia para asegurar la transparencia y accesibilidad de sus procesos. A través de un Contrato Inteligente (Smart Contract) basado en la tecnología Blockchain, todas las Actas se almacenan de manera segura y descentralizada, garantizando su integridad y evitando alteraciones. Además, cualquier persona puede consultarlas en tiempo real desde nuestro portal web oficial.
 
-## Acceso a las Actas
+## Acceso a los Oficios
 
-Para acceder a las Actas del Consejo Territorial, simplemente visita nuestro [Github](https://github.com/blockchaintechnologysas/SmartContract/blob/main/actas/CTP_Calima/README.md) y encuentra un enlace directo al registro de Actas del CTP. Desde cualquier dispositivo con conexión a internet, podrás verificar la transpariencia a la información de manera rápida.
+Para acceder a los Oficios del Consejo Territorial, simplemente visita nuestro [Github](https://github.com/blockchaintechnologysas/SmartContract/blob/main/actas/CTP_Calima/README.md) y encuentra un enlace directo al registro de Actas del CTP. Desde cualquier dispositivo con conexión a internet, podrás verificar la transpariencia a la información de manera rápida.
 
 ## Participa
 
