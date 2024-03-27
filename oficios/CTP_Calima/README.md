@@ -1,4 +1,4 @@
-Direccion: https://explorer.scolcoin.com/address/0x45D32551890263bA67a64fC97Fc9688224eaCb99/transactions
+Direccion: https://explorer.scolcoin.com/address/0x23a0F7e8c333992dA037FD88d97CE87851CCAA0D/transactions
 
 # Municipio Calima Darien - Primer Consejo Territorial (CTP) Municipal con Almacenamiento de Actas en Blockchain
 
