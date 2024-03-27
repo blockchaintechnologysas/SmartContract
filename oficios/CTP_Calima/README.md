@@ -14,7 +14,7 @@ Este Consejo Territorial marca la diferencia al adoptar tecnología de vanguardi
 
 ## Acceso a los Oficios
 
-Para acceder a los Oficios del Consejo Territorial, simplemente visita nuestro [Github](https://github.com/blockchaintechnologysas/SmartContract/blob/main/actas/CTP_Calima/README.md) y encuentra un enlace directo al registro de Actas del CTP. Desde cualquier dispositivo con conexión a internet, podrás verificar la transpariencia a la información de manera rápida.
+Para acceder a los Oficios del Consejo Territorial, simplemente visita nuestro [Github](https://github.com/blockchaintechnologysas/SmartContract/blob/main/oficios/CTP_Calima/README.md) y encuentra un enlace directo al registro de Oficios del CTP Calima Darien. Desde cualquier dispositivo con conexión a internet, podrás verificar la transpariencia a la información de manera rápida solo con el ID.
 
 ## Participa
 
