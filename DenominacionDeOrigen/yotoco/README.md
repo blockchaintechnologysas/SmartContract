@@ -1,6 +1,9 @@
 # Revolución en la Denominación de Origen de Yotoco
 
-En el corazón de Colombia, en el hermoso municipio de Yotoco, en el Valle del Cauca, se está llevando a cabo una emocionante revolución en la forma en que se registran y protegen las valiosas Denominaciones de Origen (CDO). La alcaldía de Yotoco ha dado un paso audaz hacia el futuro adoptando la tecnología blockchain para modernizar sus registros y proteger la identidad de sus campesinos, productores y artesanías con origen en esta tierra tan especial.
+En el corazón de Colombia, en el hermoso municipio de Yotoco, en el Valle del Cauca, se está llevando a cabo una emocionante revolución en la forma en que se registran y Certifican las valiosas Denominaciones de Origen (CDO). La alcaldía de Yotoco ha dado un paso audaz hacia el futuro adoptando la tecnología blockchain para modernizar sus registros y proteger la identidad de sus campesinos, productores y artesanías con origen en esta tierra tan especial.
+
+## Gestion y Alianzas
+Gracias al señor alcalde Luis Mario Valens Bedoya, durante su mandato para el periodo 2024-2027 en el municipio de Yotoco, Valle del Cauca, y en colaboración con la empresa BLOCKCHAIN TECHNOLOGY SOLUTIONS AND ARTIFICIAL INTELLIGENCE AI S.A.S., se ha generado un acuerdo innovador que refleja su visión progresista en el ámbito de las nuevas tecnologías de la información y la comunicación (TIC). Este acuerdo tiene como objetivo principal beneficiar a la comunidad de Yotoco, así como a sus unidades productoras, principalmente en el sector agrícola, mediante la implementación de soluciones tecnológicas avanzadas.
 
 ## ¿Qué es una Denominación de Origen (CDO)?
 
