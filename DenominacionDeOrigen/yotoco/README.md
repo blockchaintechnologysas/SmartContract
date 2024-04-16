@@ -1,5 +1,6 @@
 # Contrato IDBLK
-Dirección: 0x4d7866EA283C187f30282b13C201FDEc8De96c75
+- Dirección: 0x4d7866EA283C187f30282b13C201FDEc8De96c75
+- Link: https://explorer.scolcoin.com/address/0x4d7866EA283C187f30282b13C201FDEc8De96c75/contracts
 
 # Revolución en la Denominación de Origen de Yotoco
 
