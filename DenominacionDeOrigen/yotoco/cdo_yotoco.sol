@@ -1,41 +1,48 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// Importación de contratos de OpenZeppelin
+// Importación de contratos de OpenZeppelin para la gestión de permisos
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.5.0/contracts/access/Ownable.sol";
+
+// Importación de la librería EnumerableSet para conjuntos de direcciones
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.5.0/contracts/utils/structs/EnumerableSet.sol";
 
+/**
+ * @title DenominacionDeOrigen
+ * @dev Contrato para la gestión de Denominaciones de Origen (CDO)
+ */
 contract DenominacionDeOrigen is Ownable {
     // Usamos la librería EnumerableSet para conjuntos de direcciones
     using EnumerableSet for EnumerableSet.AddressSet;
 
-    // Estructura para los datos de la Denominación de Origen
+    // Estructura para los datos de la Denominación de Origen (CDO)
     struct CDO {
-        uint256 id;
-        string fecha;
-        string hora;
-        string producto;
-        string razonsocial;
-        string identificacion;
-        string ciudad;
-        string pais;
-        string URI;
-        address usuario; //wallet usuario mas datos
-        address wallet;
-        bool status;        //estado del certificado
-        string arancelario; // codigo arancelario
+        uint256 id;                 // Identificador único de la CDO
+        string fecha;               // Fecha de registro
+        string hora;                // Hora de registro
+        string producto;            // Producto asociado a la CDO
+        string razonsocial;         // Razón social asociada a la CDO
+        string identificacion;      // Identificación asociada a la CDO
+        string ciudad;              // Ciudad asociada a la CDO
+        string pais;                // País asociado a la CDO
+        string URI;                 // URI relacionada con la CDO
+        address usuario;            // Dirección del usuario relacionado a la CDO
+        address wallet;             // Dirección de la billetera relacionada a la CDO
+        bool status;                // Estado de la CDO (activo/inactivo)
+        string arancelario;         // Código arancelario asociado a la CDO
     }
 
     // Conjunto de direcciones de VPS autorizados
     EnumerableSet.AddressSet private authorizedVPS;
 
-    // Conjunto de datos de Denominaciones de Origen
+    // Conjunto de datos de Denominaciones de Origen (CDOs)
     mapping(uint256 => CDO) public CDOs;
-    uint256 public totalCDOs;
+    uint256 public totalCDOs;   // Total de CDOs registradas
 
-    // Evento emitido cuando se registra una nueva Denominación de Origen
+    // Evento emitido cuando se registra una nueva Denominación de Origen (CDO)
     event CDORegistrada(uint256 indexed id, string fecha, string producto, address indexed usuario);
-    // Evento emitido cuando el status de una Denominación de Origen es modificado
+
+    // Evento emitido cuando el estado de una Denominación de Origen (CDO) es modificado
     event StatusModificado(uint256 indexed id, bool nuevoStatus);
 
     // Modificador para restringir el acceso a las funciones solo a VPS autorizados
@@ -49,7 +56,7 @@ contract DenominacionDeOrigen is Ownable {
         return authorizedVPS.contains(_vps);
     }
 
-    // Función para autorizar un VPS (solo el dueño puede llamar a esta función)
+    // Función para autorizar un VPS (solo el propietario puede llamar a esta función)
     function authorizeVPS(address _vps) external onlyOwner {
         require(!isVPSAuthorized(_vps), "VPS ya autorizado");
         authorizedVPS.add(_vps);
