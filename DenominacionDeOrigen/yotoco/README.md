@@ -1,3 +1,6 @@
+#Contrato IDBLK
+Dirección: 0x4d7866EA283C187f30282b13C201FDEc8De96c75
+
 # Revolución en la Denominación de Origen de Yotoco
 
 En el corazón de Colombia, en el hermoso municipio de Yotoco, en el Valle del Cauca, se está llevando a cabo una emocionante revolución en la forma en que se registran y Certifican las valiosas Denominaciones de Origen (CDO). La alcaldía de Yotoco ha dado un paso audaz hacia el futuro adoptando la tecnología blockchain para modernizar sus registros y proteger la identidad de sus campesinos, productores y artesanías con origen en esta tierra tan especial.
