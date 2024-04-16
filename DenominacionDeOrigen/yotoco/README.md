@@ -3,15 +3,15 @@
 En el corazón de Colombia, en el hermoso municipio de Yotoco, en el Valle del Cauca, se está llevando a cabo una emocionante revolución en la forma en que se registran y Certifican las valiosas Denominaciones de Origen (CDO). La alcaldía de Yotoco ha dado un paso audaz hacia el futuro adoptando la tecnología blockchain para modernizar sus registros y proteger la identidad de sus campesinos, productores y artesanías con origen en esta tierra tan especial.
 
 ## Gestion y Alianzas
-Gracias al señor alcalde Luis Mario Valens Bedoya, durante su mandato para el periodo 2024-2027 en el municipio de Yotoco, Valle del Cauca, y en colaboración con la empresa BLOCKCHAIN TECHNOLOGY SOLUTIONS AND ARTIFICIAL INTELLIGENCE AI S.A.S., se ha generado un acuerdo innovador que refleja su visión progresista en el ámbito de las nuevas tecnologías de la información y la comunicación (TIC). Este acuerdo tiene como objetivo principal beneficiar a la comunidad de Yotoco, así como a sus unidades productoras, principalmente en el sector agrícola, mediante la implementación de soluciones tecnológicas avanzadas.
+Gracias al señor alcalde Luis Mario Valens Bedoya, durante su mandato para el periodo 2024-2027 en el municipio de Yotoco, Valle del Cauca, y en colaboración con la empresa BLOCKCHAIN TECHNOLOGY SOLUTIONS AND ARTIFICIAL INTELLIGENCE AI S.A.S., se ha generado un acuerdo innovador que refleja su visión progresista en el ámbito de las nuevas tecnologías de la información y la comunicación (TIC). Este acuerdo tiene como objetivo principal beneficiar a la comunidad de Yotoco, así como a sus unidades productoras, principalmente en el sector agrícola, mediante la implementación de soluciones tecnológicas avanzadas. Además, la colaboración con la plataforma de identidad digital basada en blockchain, IDBLK.com, permite almacenar de manera segura los Certificados de Denominación de Origen (CDO) creado por BLOCKCHAIN TECHNOLOGY.
 
-## ¿Qué es una Denominación de Origen (CDO)?
+## ¿Qué es una Certificación Denominación de Origen (CDO) en IDBLK?
 
-Una Denominación de Origen (CDO) es mucho más que una simple etiqueta. Es un sello de autenticidad que garantiza que un producto proviene de una región específica y posee cualidades únicas derivadas de su origen geográfico y condiciones locales. Para Yotoco, esto significa proteger y promover su rica herencia agrícola y cultural, que abarca desde deliciosos productos agrícolas hasta increíbles artesanías tradicionales.
+Un Certificado de Denominación de Origen (CDO) es mucho más que una simple etiqueta. Es un sello de autenticidad que garantiza que un producto proviene de una región específica y posee cualidades únicas derivadas de su origen geográfico y condiciones locales. Para Yotoco, esto significa proteger y promover su rica herencia agrícola y cultural, que abarca desde deliciosos productos agrícolas hasta increíbles artesanías tradicionales .
 
-## La Importancia de la Denominación de Origen
+## La Importancia de la Certificación Denominación de Origen (CDO).
 
-La Denominación de Origen es crucial para proteger la identidad y el patrimonio de una región. Garantiza que los productos auténticos de Yotoco sean reconocidos y valorados en el mercado nacional e internacional por su calidad y autenticidad. Además, brinda a los consumidores la confianza de que están adquiriendo productos genuinos y apoyando directamente a los agricultores y artesanos locales.
+La Denominación de Origen es crucial para proteger la identidad y el patrimonio de una región. Garantiza que los productos auténticos de Yotoco sean reconocidos y valorados en el mercado nacional e internacional por su calidad y autenticidad. Además, brinda a los consumidores la confianza de que están adquiriendo productos genuinos y apoyando directamente a los agricultores y artesanos locales. gracias a la articulación de las secretarias de la alcaldia conjunto a la comunidad se genera una identidad digital de toda una región.
 
 ## La Innovación de Yotoco
 
