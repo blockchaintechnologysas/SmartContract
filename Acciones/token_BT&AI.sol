@@ -32,7 +32,7 @@ contract Token_BT_AI is ERC20, Ownable {
      * @param initialOwner Dirección que recibirá el total de acciones (Fundación de la empresa)
      */
     constructor(address initialOwner) 
-        ERC20("BLOCKCHAIN TECHNOLOGY AND AI", "BT&AI") 
+        ERC20("BLOCKCHAIN TECHNOLOGY", "BT&AI") 
     {    
         // Emisión inicial de 100,000,000,000 acciones ordinarias con voz y voto
         _mint(initialOwner, 100_000_000_000 * 10 ** _decimals);
