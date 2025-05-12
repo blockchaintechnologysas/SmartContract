@@ -27,7 +27,7 @@ contract StrategicGovernance is Ownable {
     uint256 public constant VOTING_PERIOD = 7 days;
     uint256 public constant QUORUM_PERCENTAGE = 51;
     uint256 public constant PARCEL_VOTE_WEIGHT = 1e18; // 1 token de peso por parcela
-    uint256 public constant MIN_PROPOSAL_TOKENS = 1000 * 1e18; // Mínimo para proponer
+    uint256 public constant MIN_PROPOSAL_TOKENS = 1000000 * 1e18; // Mínimo para proponer
     
     enum ProposalType { STRATEGIC, OPERATIONAL, GOVERNANCE }
     enum ProposalStatus { ACTIVE, APPROVED, REJECTED }
