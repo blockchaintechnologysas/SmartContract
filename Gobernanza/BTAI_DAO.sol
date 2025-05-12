@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+// Importaciones directas desde GitHub (v4.9.0)
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.0/contracts/access/Ownable.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.0/contracts/token/ERC20/ERC20.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.0/contracts/utils/structs/EnumerableSet.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.0/contracts/token/ERC20/IERC20.sol";
 
 /**
  * @title BT&AI Share Registry - Libro de Accionistas Digital
@@ -38,7 +39,7 @@ contract BTAI_ShareRegistry is ERC20, Ownable {
     string public constant LEGAL_NAME = "BLOCKCHAIN TECHNOLOGY SOLUTIONS AND ARTIFICIAL INTELLIGENCE AI S.A.S";
     string public constant TAX_ID = "901676524-7";
     string public constant ADDRESS = "Carrera 14 A #25-06, Calima, Valle del Cauca";
-    string public constant REGISTRATION = "Matrícula No: 83800";
+    string public constant REGISTRATION = "Matricula No: 83800";
 
     event SharesTransferred(address indexed from, address indexed to, uint256 amount, string observation);
     event SuccessionExecuted(address indexed deceased, address[] heirs, uint256[] amounts, string legalDocument);
@@ -84,7 +85,7 @@ contract BTAI_ShareRegistry is ERC20, Ownable {
         for (uint i = 0; i < heirs.length; i++) {
             _transfer(deceased, heirs[i], amounts[i]);
             _recordTransfer(deceased, heirs[i], amounts[i], 
-                string(abi.encodePacked("Sucesión. Doc: ", legalDocument)));
+                string(abi.encodePacked("Sucesion. Doc: ", legalDocument)));
             _updateShareholder(heirs[i], balanceOf(heirs[i]));
         }
         
@@ -111,7 +112,7 @@ contract BTAI_ShareRegistry is ERC20, Ownable {
                     shareholder, 
                     owner(), 
                     balance, 
-                    string(abi.encodePacked("Migración a nuevo contrato: ", _addressToString(newContractAddress)))
+                    string(abi.encodePacked("Migracion a nuevo contrato: ", _addressToString(newContractAddress)))
                 );
                 
                 _updateShareholder(shareholder, 0);
@@ -127,7 +128,7 @@ contract BTAI_ShareRegistry is ERC20, Ownable {
                 owner(), 
                 newContractAddress, 
                 ownerBalance, 
-                "Migración final a nuevo contrato"
+                "Migracion final a nuevo contrato"
             );
         }
         
@@ -318,8 +319,6 @@ contract BTAI_DAO is Ownable {
         if (p.tokenAddress == address(shareRegistry)) {
             IERC20(p.tokenAddress).transfer(p.targetAddress, p.amount);
         } else {
-            // Para otros tokens, el contrato DAO debe tener los fondos aprovisionados
-            // Requeriría una función de aprovisionamiento separada
             revert("External token execution not yet implemented");
         }
         
@@ -373,7 +372,6 @@ contract BTAI_DAO is Ownable {
             }
         }
         
-        // Limpiar candidatos después de elecciones
         delete candidates;
     }
     
@@ -405,10 +403,8 @@ contract BTAI_DAO is Ownable {
     function _updateTopShareholders() internal {
         delete topShareholders;
         
-        // Esto es una simplificación - en producción necesitarías ordenar a los accionistas por balance
         BTAI_ShareRegistry.Shareholder[] memory shareholders = shareRegistry.getShareholderList();
         
-        // Implementación básica - en realidad deberías ordenar y seleccionar los TOP_SHAREHOLDERS_COUNT
         for (uint i = 0; i < shareholders.length && i < TOP_SHAREHOLDERS_COUNT; i++) {
             topShareholders.add(shareholders[i].wallet);
         }
@@ -427,7 +423,7 @@ contract BTAI_DAO is Ownable {
                 if (totalVotes * 100 >= totalSupply * QUORUM_PERCENTAGE) {
                     p.status = p.yesVotes > p.noVotes ? ProposalStatus.APPROVED : ProposalStatus.REJECTED;
                 } else {
-                    p.status = ProposalStatus.REJECTED; // No se alcanzó quórum
+                    p.status = ProposalStatus.REJECTED;
                 }
             }
             
