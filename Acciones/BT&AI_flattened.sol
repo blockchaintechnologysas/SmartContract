@@ -1,4 +1,3 @@
-// BT&AI_flattened.sol
 /// @title BT&AI Token (BT&AI) - RWA de Acciones Ordinarias
 /// @dev ERC20 token que representa acciones de Blockchain Technology Solutions And Artificial Intelligence AI S.A.S
 /// @author BLOCKCHAIN TECHNOLOGY SOLUTIONS AND ARTIFICIAL INTELLIGENCE AI S.A.S
