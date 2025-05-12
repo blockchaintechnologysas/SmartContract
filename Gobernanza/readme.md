@@ -32,3 +32,25 @@
 - **Registro inmutable**: Todos los movimientos quedan en blockchain
 - **Verificación legal**: Mecanismos para sucesiones y cambios importantes
 - **Acceso público**: Cualquiera puede verificar el estado accionario
+
+### 5. Función de Migración (BTAI_Migration)
+- **Acceso Controlado**:
+  - Solo el owner puede ejecutar la migración
+  - El contrato se marca como inactivo después de la migración
+  
+- **Proceso Completo**:
+  - Recoge todos los tokens de todos los accionistas
+  - Los transfiere al dueño del contrato
+  - Opcionalmente los puede enviar directamente a un nuevo contrato
+  
+- **Registro Detallado**:
+  - Cada transferencia queda registrada en el historial
+  - Evento especial `ContractMigrated` con todos los detalles
+  
+- **Seguridad**:
+  - Todas las funciones de transferencia se desactivan después de la migración
+  - Modificador `onlyActive` protege las funciones clave
+  
+- **Transparencia**:
+  - Los accionistas pueden verificar el estado de migración
+  - Todo el historial de transferencias permanece accesible
