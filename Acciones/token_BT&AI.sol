@@ -18,14 +18,14 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.0/contr
  * derechos económicos y de gobernanza sobre la empresa.
  */
 contract Token_BT_AI is ERC20, Ownable {
-    uint8 private constant _decimals = 2; // Decimales típicos para representación de acciones
+    uint8 private constant _decimals = 18; // Decimales típicos para representación de acciones
     
     // Información legal de la empresa
     string public constant RAZON_SOCIAL = "BLOCKCHAIN TECHNOLOGY SOLUTIONS AND ARTIFICIAL INTELLIGENCE AI S.A.S";
     string public constant SIGLA = "BLOCKCHAIN TECHNOLOGY";
     string public constant NIT = "901676524-7";
     string public constant DOMICILIO = "Calima, Valle del Cauca";
-    string public constant MATRICULA = "Matrícula No: 83800";
+    string public constant MATRICULA = "Matricula No: 83800";
     
     /**
      * @notice Constructor que inicializa el contrato con el suministro total de acciones
@@ -43,13 +43,13 @@ contract Token_BT_AI is ERC20, Ownable {
      */
     function legalInfo() public pure returns (string memory) {
         return string(abi.encodePacked(
-            "Razón Social: ", RAZON_SOCIAL, "\n",
+            "Razon Social:", RAZON_SOCIAL, "\n",
             "Sigla: ", SIGLA, "\n",
             "NIT: ", NIT, "\n",
             "Domicilio: ", DOMICILIO, "\n",
             MATRICULA, "\n",
-            "Las acciones representan unidades de participación patrimonial que otorgan ",
-            "a los inversores derechos económicos y de gobernanza sobre la empresa."
+            "Las acciones representan unidades de participacion patrimonial que otorgan ",
+            "a los inversores derechos economicos y de gobernanza sobre la empresa."
         ));
     }
 }
