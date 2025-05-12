@@ -27,7 +27,7 @@ contract FundGovernance is Ownable {
     
     uint256 public constant VOTING_PERIOD = 7 days;
     uint256 public constant QUORUM_PERCENTAGE = 51;
-    uint256 public constant PARCEL_VOTE_WEIGHT = 1e18; // 1 token de peso por parcela
+    uint256 public constant PARCEL_VOTE_WEIGHT = 1e15; // 1 token de peso por parcela
     
     struct FundProposal {
         uint256 id;
