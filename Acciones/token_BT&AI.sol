@@ -11,13 +11,13 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.0/contr
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.0/contracts/token/ERC20/ERC20.sol";
 
 /**
- * @title Token_BT_AI
+ * @title Token BLOCKCHAIN_TECHNOLOGY
  * @dev Implementación de un token ERC20 que representa acciones ordinarias de
  * BLOCKCHAIN TECHNOLOGY SOLUTIONS AND ARTIFICIAL INTELLIGENCE AI S.A.S (NIT 901676524-7)
  * @notice Las acciones representan unidades de participación patrimonial que otorgan
  * derechos económicos y de gobernanza sobre la empresa.
  */
-contract Token_BT_AI is ERC20, Ownable {
+contract BLOCKCHAIN_TECHNOLOGY is ERC20, Ownable {
     uint8 private constant _decimals = 18; // Decimales típicos para representación de acciones
     
     // Información legal de la empresa
