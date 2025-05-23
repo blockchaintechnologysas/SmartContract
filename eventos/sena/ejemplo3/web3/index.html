@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Leche Trazabilidad Web3</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+</head>
+<body>
+  <h2>🌿 Leche Trazabilidad - Web3 Interface</h2>
+
+  <button onclick="connectWallet()">🔌 Conectar Wallet</button>
+  <p id="walletAddress">No conectado</p>
+
+  <hr>
+
+  <h3>🛒 Comprar NFT de leche</h3>
+  <label>ID del NFT: <input type="number" id="nftIdCompra" /></label>
+  <button onclick="comprarNFT()">Comprar</button>
+  <p id="compraStatus"></p>
+
+  <hr>
+
+  <h3>📦 NFTs comprados</h3>
+  <button onclick="verMisNFTs()">Ver Mis NFTs</button>
+  <ul id="nftsList"></ul>
+
+  <script>
+    let web3;
+    let contract;
+    let currentAccount;
+
+    const contractAddress = "TU_DIRECCION_DEL_CONTRATO"; // 🔁 Reemplaza esto
+    const contractABI = [ /* 🔁 Pega aquí tu ABI generado */ ];
+
+    async function connectWallet() {
+      if (window.ethereum) {
+        web3 = new Web3(window.ethereum);
+        await window.ethereum.request({ method: "eth_requestAccounts" });
+        const accounts = await web3.eth.getAccounts();
+        currentAccount = accounts[0];
+        document.getElementById("walletAddress").innerText = `Conectado: ${currentAccount}`;
+        contract = new web3.eth.Contract(contractABI, contractAddress);
+      } else {
+        alert("MetaMask no está disponible");
+      }
+    }
+
+    async function comprarNFT() {
+      const nftId = document.getElementById("nftIdCompra").value;
+      try {
+        const precio = await contract.methods.precioPorLitro().call();
+        await contract.methods.p4_comprarNFT(nftId).send({
+          from: currentAccount
+        });
+        document.getElementById("compraStatus").innerText = "✅ Compra exitosa!";
+      } catch (error) {
+        console.error(error);
+        document.getElementById("compraStatus").innerText = "❌ Error al comprar";
+      }
+    }
+
+    async function verMisNFTs() {
+      try {
+        const nfts = await contract.methods.nftsDeUsuario(currentAccount).call();
+        const list = document.getElementById("nftsList");
+        list.innerHTML = "";
+        if (nfts.length === 0) {
+          list.innerHTML = "<li>No tienes NFTs</li>";
+        } else {
+          nfts.forEach(id => {
+            const item = document.createElement("li");
+            item.innerText = "NFT ID: " + id;
+            list.appendChild(item);
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  </script>
+</body>
+</html>
