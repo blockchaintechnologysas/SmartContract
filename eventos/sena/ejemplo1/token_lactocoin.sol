@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: MIT
+
 pragma solidity 0.8.18;
 
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.5/contracts/access/Ownable.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.5/contracts/token/ERC20/ERC20.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.5/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
-contract MiToken is ERC20, ERC20Burnable, Ownable {
+contract Tokenstandar is ERC20, ERC20Burnable, Ownable {
     uint8 private _decimals;
 
     constructor(
