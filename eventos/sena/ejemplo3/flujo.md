@@ -19,12 +19,15 @@ procesarNFTs(
     5000                 // Cantidad de NFTs a mintear
 );
 
-// Paso 3: Distribuidor
-```
 // Paso 3: Registrar distribución del NFT #123
 registrarDistribucion(
     123,                 // ID del NFT
     "Almacén Central",   // Centro de almacenamiento
     "REF-789"            // Transporte utilizado
 );
-```
+
+// Paso 4: Compra del NFT #123 (pago con tokens ERC-20)
+comprarNFT(123);        // Transfiere tokens y recibe el NFT
+
+// Paso 5: Escanear QR y consultar datos del NFT #123
+consultarTrazabilidad(123);
