@@ -62,7 +62,7 @@ contract LecheTrazabilidad is ERC721, Ownable {
     }
 
     // Función 1: Registrar Lote (Denominación de Origen)
-    function registrarLote(
+    function p1_registrarLote(
         string memory _nombreLote,
         string memory _denominacionOrigen,
         uint256 _cantidadLitros,
@@ -81,7 +81,7 @@ contract LecheTrazabilidad is ERC721, Ownable {
     }
 
     // Función 2: Procesamiento Industrial (Minting de NFTs)
-    function procesarNFTs(
+    function p2_procesarNFTs(
         uint256 _loteId,
         string memory _planta,
         string memory _maquinaEnvasadora,
@@ -103,7 +103,7 @@ contract LecheTrazabilidad is ERC721, Ownable {
     }
 
     // Función 3: Almacenamiento/Distribución
-    function registrarDistribucion(
+    function p3_registrarDistribucion(
         uint256 _nftId,
         string memory _almacen,
         string memory _transporte
@@ -116,7 +116,7 @@ contract LecheTrazabilidad is ERC721, Ownable {
     }
 
     // Función 4: Venta al Punto de Venta (Compra con Token ERC-20)
-    function comprarNFT(uint256 _nftId) external {
+    function p4_comprarNFT(uint256 _nftId) external {
         require(ownerOf(_nftId) == address(this), "NFT no disponible");
         tokenPago.transferFrom(msg.sender, owner(), precioPorLitro);
         _transfer(address(this), msg.sender, _nftId);
@@ -131,7 +131,7 @@ contract LecheTrazabilidad is ERC721, Ownable {
     }
 
     // Función 5: Consulta de Trazabilidad por NFT
-    function consultarTrazabilidad(uint256 _nftId) external view returns (
+    function p5_consultarTrazabilidad(uint256 _nftId) external view returns (
         Lote memory lote,
         Procesamiento memory procesamiento,
         Distribucion memory distribucion,
