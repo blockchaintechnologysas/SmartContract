@@ -1,216 +1,110 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.18;
 
-import "@openzeppelin/contracts@4.9.5/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts@4.9.5/access/Ownable.sol";
+import "@openzeppelin/contracts@4.9.5/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts@4.9.5/utils/structs/EnumerableSet.sol";
 
-contract GovernanceToken is ERC20, Ownable {
-    constructor(string memory name, string memory symbol) ERC20(name, symbol) {}
-
-    function mint(address to, uint256 amount) public onlyOwner {
-        _mint(to, amount);
-    }
-}
-
-contract CompanyDAO {
+contract BoardGovernance is Ownable {
     using EnumerableSet for EnumerableSet.AddressSet;
-
-    // Token de gobernanza
-    GovernanceToken public governanceToken;
-
-    // Estructura para candidato
-    struct Candidate {
-        address wallet;
-        uint256 votes;
-    }
-
-    // Estructura para posición
-    struct Position {
-        string title;
-        mapping(uint256 => Candidate) candidatesMapping; // Usamos mapping en lugar de array
-        uint256 candidatesCount;
-        bool electionOpen;
-        uint256 lastElectionTime;
-        address currentHolder;
-    }
-
-    // Posiciones en la junta directiva
-    Position[] public positions;
     
-    // Socios con derecho a voto
-    EnumerableSet.AddressSet private shareholders;
-
-    // Configuración
-    uint256 public constant ELECTION_INTERVAL = 2 * 365 days;
-    uint256 public constant VOTING_DURATION = 1 days;
-
-    // Eventos
-    event ElectionStarted(uint256 timestamp);
-    event VoteCast(address indexed voter, uint256 positionIndex, address candidate, uint256 votes);
-    event ElectionResult(uint256 positionIndex, address winner, uint256 votes);
-    event CandidateProposed(uint256 positionIndex, address candidate);
-
-    constructor(address _governanceTokenAddress) {
-        governanceToken = GovernanceToken(_governanceTokenAddress);
-        
-        // Inicializar las posiciones
-        _addPosition("Presidente");
-        _addPosition("Vicepresidente");
-        _addPosition("Fiscal");
+    address public constant BT_AI_TOKEN = 0x01667E6fedBF020df3C51EB70Ab8420194332a8b;
+    uint256 public constant TOP_SHAREHOLDERS_COUNT = 4;
+    uint256 public constant VOTING_PERIOD = 1 days;
+    
+    struct Proposal {
+        uint256 id;
+        string description;
+        uint256 endDate;
+        uint256 yesVotes;
+        uint256 noVotes;
+        bool executed;
+        mapping(address => bool) votes;
     }
-
-    // Función interna para añadir posiciones
-    function _addPosition(string memory title) internal {
-        Position storage newPosition;
-        newPosition.title = title;
-        newPosition.electionOpen = false;
-        newPosition.lastElectionTime = 0;
-        newPosition.currentHolder = address(0);
-        newPosition.candidatesCount = 0;
-        
-        positions.push(newPosition);
+    
+    struct BoardPosition {
+        string title;
+        address holder;
+        uint256 electionDate;
+        uint256 nextElection;
     }
+    
+    uint256 public proposalCount;
+    mapping(uint256 => Proposal) public proposals;
+    BoardPosition[] public boardPositions;
+    EnumerableSet.AddressSet private topHolders;
+    EnumerableSet.AddressSet private eligibleVoters;
+    
+    event ProposalCreated(uint256 id, address proposer, string description);
+    event Voted(uint256 proposalId, address voter, bool support);
+    event ProposalExecuted(uint256 proposalId);
+    event BoardMemberElected(string position, address member);
 
-    // Modificador para verificar si es socio
-    modifier onlyShareholder() {
-        require(governanceToken.balanceOf(msg.sender) > 0, "No eres socio");
-        _;
+    constructor() {
+        _initializeBoardPositions();
     }
-
-    // Iniciar proceso de elección
-    function startElection() public onlyShareholder {
-        require(canStartElection(), "No es tiempo de elecciones o ya hay una en curso");
+    
+    function createProposal(string memory description) public {
+        require(isTopHolder(msg.sender), "Solo los 10 mayores holders pueden proponer");
+        require(hasVotingRight(msg.sender), "Debes ser socio para proponer");
         
-        for (uint256 i = 0; i < positions.length; i++) {
-            positions[i].electionOpen = true;
-            positions[i].candidatesCount = 0; // Resetear contador de candidatos
-            positions[i].lastElectionTime = block.timestamp;
+        uint256 proposalId = proposalCount++;
+        Proposal storage p = proposals[proposalId];
+        
+        p.id = proposalId;
+        p.description = description;
+        p.endDate = block.timestamp + VOTING_PERIOD;
+        
+        emit ProposalCreated(proposalId, msg.sender, description);
+    }
+    
+    function vote(uint256 proposalId, bool support) public {
+        Proposal storage p = proposals[proposalId];
+        require(hasVotingRight(msg.sender), "No tienes derechos para votar");
+        require(block.timestamp <= p.endDate, "Periodo de votacion terminado");
+        require(!p.votes[msg.sender], "Ya votaste");
+        
+        p.votes[msg.sender] = true;
+        
+        if (support) {
+            p.yesVotes++;
+        } else {
+            p.noVotes++;
         }
         
-        emit ElectionStarted(block.timestamp);
+        emit Voted(proposalId, msg.sender, support);
     }
-
-    // Verificar si se puede iniciar elección
-    function canStartElection() public view returns (bool) {
-        if (positions.length == 0) return false;
+    
+    function executeProposal(uint256 proposalId) public onlyOwner {
+        Proposal storage p = proposals[proposalId];
+        require(block.timestamp > p.endDate, "Votacion en curso");
+        require(!p.executed, "Propuesta ya ejecutada");
         
-        for (uint256 i = 0; i < positions.length; i++) {
-            if (positions[i].electionOpen) {
-                return false;
-            }
-        }
-        
-        return (block.timestamp - positions[0].lastElectionTime) >= ELECTION_INTERVAL;
-    }
-
-    // Proponer candidato para una posición
-    function proposeCandidate(uint256 positionIndex, address candidateWallet) public onlyShareholder {
-        require(positionIndex < positions.length, "Posicion invalida");
-        require(positions[positionIndex].electionOpen, "Eleccion no esta abierta para esta posicion");
-        
-        // Verificar que el candidato no haya sido ya propuesto
-        for (uint256 i = 0; i < positions[positionIndex].candidatesCount; i++) {
-            require(
-                positions[positionIndex].candidatesMapping[i].wallet != candidateWallet, 
-                "Candidato ya propuesto"
-            );
-        }
-        
-        uint256 newCandidateIndex = positions[positionIndex].candidatesCount;
-        positions[positionIndex].candidatesMapping[newCandidateIndex] = Candidate({
-            wallet: candidateWallet,
-            votes: 0
-        });
-        positions[positionIndex].candidatesCount++;
-        
-        emit CandidateProposed(positionIndex, candidateWallet);
-    }
-
-    // Votar por un candidato
-    function vote(uint256 positionIndex, uint256 candidateIndex) public onlyShareholder {
-        require(positionIndex < positions.length, "Posicion invalida");
-        require(candidateIndex < positions[positionIndex].candidatesCount, "Candidato invalido");
-        require(positions[positionIndex].electionOpen, "Eleccion no esta abierta para esta posicion");
-        require(
-            block.timestamp - positions[positionIndex].lastElectionTime <= VOTING_DURATION, 
-            "Periodo de votacion ha terminado"
-        );
-        
-        uint256 voteWeight = governanceToken.balanceOf(msg.sender);
-        require(voteWeight > 0, "No tienes tokens para votar");
-        
-        positions[positionIndex].candidatesMapping[candidateIndex].votes += voteWeight;
-        emit VoteCast(
-            msg.sender, 
-            positionIndex, 
-            positions[positionIndex].candidatesMapping[candidateIndex].wallet, 
-            voteWeight
-        );
-    }
-
-    // Finalizar elección y declarar ganadores
-    function finalizeElection() public onlyShareholder {
-        require(canFinalizeElection(), "No se puede finalizar la eleccion aun");
-        
-        for (uint256 i = 0; i < positions.length; i++) {
-            if (positions[i].candidatesCount > 0) {
-                address winner = positions[i].candidatesMapping[0].wallet;
-                uint256 maxVotes = positions[i].candidatesMapping[0].votes;
-                
-                for (uint256 j = 1; j < positions[i].candidatesCount; j++) {
-                    if (positions[i].candidatesMapping[j].votes > maxVotes) {
-                        maxVotes = positions[i].candidatesMapping[j].votes;
-                        winner = positions[i].candidatesMapping[j].wallet;
-                    }
-                }
-                
-                positions[i].currentHolder = winner;
-                positions[i].electionOpen = false;
-                emit ElectionResult(i, winner, maxVotes);
-            }
+        if (p.yesVotes > p.noVotes) {
+            // Lógica para ejecutar cambios en la junta directiva
+            p.executed = true;
+            emit ProposalExecuted(proposalId);
         }
     }
-
-    // Verificar si se puede finalizar la elección
-    function canFinalizeElection() public view returns (bool) {
-        if (positions.length == 0) return false;
-        
-        for (uint256 i = 0; i < positions.length; i++) {
-            if (!positions[i].electionOpen) {
-                return false;
-            }
-        }
-        
-        return (block.timestamp - positions[0].lastElectionTime) > VOTING_DURATION;
+    
+    function isTopHolder(address account) public view returns (bool) {
+        return topHolders.contains(account);
     }
-
-    // Obtener información de candidatos para una posición
-    function getCandidate(uint256 positionIndex, uint256 candidateIndex) 
-        public 
-        view 
-        returns (address wallet, uint256 votes) 
-    {
-        require(positionIndex < positions.length, "Posicion invalida");
-        require(candidateIndex < positions[positionIndex].candidatesCount, "Candidato invalido");
-        
-        Candidate storage candidate = positions[positionIndex].candidatesMapping[candidateIndex];
-        return (candidate.wallet, candidate.votes);
+    
+    function hasVotingRight(address account) public view returns (bool) {
+        return eligibleVoters.contains(account);
     }
-
-    // Obtener número de candidatos para una posición
-    function getCandidatesCount(uint256 positionIndex) public view returns (uint256) {
-        require(positionIndex < positions.length, "Posicion invalida");
-        return positions[positionIndex].candidatesCount;
+    
+    function _initializeBoardPositions() internal {
+        boardPositions.push(BoardPosition("Presidente", address(0), 0, 0));
+        boardPositions.push(BoardPosition("Vicepresidente", address(0), 0, 0));
+        boardPositions.push(BoardPosition("Secretario", address(0), 0, 0));
+        boardPositions.push(BoardPosition("Fiscal", address(0), 0, 0));
+        boardPositions.push(BoardPosition("Tesorero", address(0), 0, 0));
     }
-
-    // Verificar si una dirección es actual miembro de la junta
-    function isBoardMember(address wallet) public view returns (bool) {
-        for (uint256 i = 0; i < positions.length; i++) {
-            if (positions[i].currentHolder == wallet) {
-                return true;
-            }
-        }
-        return false;
+    
+    function updateTopHolders() public onlyOwner {
+        // Lógica para actualizar los top 10 holders
+        // Esto requeriría consultar los balances del token BT&AI
     }
 }
