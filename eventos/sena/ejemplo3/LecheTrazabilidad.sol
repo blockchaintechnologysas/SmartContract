@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.5/contracts/token/ERC721/ERC721.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.5/contracts/token/ERC20/IERC20.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.5/contracts/access/Ownable.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.5/contracts/utils/Counters.sol";
 
 contract LecheTrazabilidad is ERC721, Ownable {
     using Counters for Counters.Counter;
@@ -13,7 +13,7 @@ contract LecheTrazabilidad is ERC721, Ownable {
     struct Lote {
         string denominacionOrigen;
         uint256 cantidadLitros;
-        uint256 fechaOrdeño;
+        uint256 fechaOrdeno;
         address proveedor;
     }
 
@@ -55,10 +55,10 @@ contract LecheTrazabilidad is ERC721, Ownable {
     event NFTProcesado(uint256 nftId, uint256 loteId);
     event NFTVendido(uint256 nftId, address comprador);
 
-    constructor(address _tokenPago, uint256 _precioPorLitro) 
+    constructor(address _tokenPago, uint256 _precioEnTokens) 
         ERC721("LecheTrazabilidadNFT", "LTN") {
         tokenPago = IERC20(_tokenPago);
-        precioPorLitro = _precioPorLitro;
+        precioPorLitro = _precioEnTokens * 10**18; // Convertir a unidades base (wei)
     }
 
     // Función 1: Registrar Lote (Denominación de Origen)
@@ -66,14 +66,14 @@ contract LecheTrazabilidad is ERC721, Ownable {
         string memory _nombreLote,
         string memory _denominacionOrigen,
         uint256 _cantidadLitros,
-        uint256 _fechaOrdeño,
+        uint256 _fechaOrdeno,
         address _proveedor
     ) external onlyOwner {
         uint256 loteId = _loteIdCounter.current();
         lotes[loteId] = Lote({
             denominacionOrigen: _denominacionOrigen,
             cantidadLitros: _cantidadLitros,
-            fechaOrdeño: _fechaOrdeño,
+            fechaOrdeno: _fechaOrdeno,
             proveedor: _proveedor
         });
         _loteIdCounter.increment();
