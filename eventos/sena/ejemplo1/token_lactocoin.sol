@@ -1,0 +1,1 @@
+#token_lactocoin.sol
