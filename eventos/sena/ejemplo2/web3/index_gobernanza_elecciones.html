@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gobernanza Elecciones</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+</head>
+<body>
+  <h1>Interfaz de Gobernanza</h1>
+
+  <button onclick="connectWallet()">Conectar Wallet</button>
+  <p id="account">No conectado</p>
+
+  <h2>Crear Propuesta</h2>
+  <input type="text" id="proposalDesc" placeholder="Descripción de la propuesta">
+  <button onclick="createProposal()">Crear</button>
+
+  <h2>Votar</h2>
+  <input type="number" id="proposalIdVote" placeholder="ID de propuesta">
+  <button onclick="vote(true)">Sí</button>
+  <button onclick="vote(false)">No</button>
+
+  <h2>Ejecutar Propuesta</h2>
+  <input type="number" id="proposalIdExecute" placeholder="ID de propuesta">
+  <button onclick="executeProposal()">Ejecutar</button>
+
+  <h2>Verificación de Votante</h2>
+  <button onclick="checkVotingRight()">¿Tengo derecho a voto?</button>
+  <p id="votingRight"></p>
+
+  <script>
+    const contractAddress = "0xTU_DIRECCION_DEL_CONTRATO"; // Reemplaza con la dirección real
+    const abi = [/* ABI del contrato aquí */];
+
+    let web3;
+    let contract;
+    let account;
+
+    async function connectWallet() {
+      if (window.ethereum) {
+        web3 = new Web3(window.ethereum);
+        await ethereum.request({ method: "eth_requestAccounts" });
+        const accounts = await web3.eth.getAccounts();
+        account = accounts[0];
+        document.getElementById("account").innerText = "Conectado: " + account;
+        contract = new web3.eth.Contract(abi, contractAddress);
+      } else {
+        alert("Instala MetaMask");
+      }
+    }
+
+    async function createProposal() {
+      const desc = document.getElementById("proposalDesc").value;
+      await contract.methods.createProposal(desc).send({ from: account });
+      alert("Propuesta creada");
+    }
+
+    async function vote(support) {
+      const id = document.getElementById("proposalIdVote").value;
+      await contract.methods.vote(id, support).send({ from: account });
+      alert("Voto registrado");
+    }
+
+    async function executeProposal() {
+      const id = document.getElementById("proposalIdExecute").value;
+      await contract.methods.executeProposal(id).send({ from: account });
+      alert("Propuesta ejecutada");
+    }
+
+    async function checkVotingRight() {
+      const hasRight = await contract.methods.hasVotingRight(account).call();
+      document.getElementById("votingRight").innerText = hasRight ? "Tienes derecho a voto" : "No tienes derecho a voto";
+    }
+  </script>
+</body>
+</html>
