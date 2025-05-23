@@ -18,3 +18,13 @@ procesarNFTs(
     "E-45",              // Máquina envasadora
     5000                 // Cantidad de NFTs a mintear
 );
+
+// Paso 3: Distribuidor
+```
+// Paso 3: Registrar distribución del NFT #123
+registrarDistribucion(
+    123,                 // ID del NFT
+    "Almacén Central",   // Centro de almacenamiento
+    "REF-789"            // Transporte utilizado
+);
+```
