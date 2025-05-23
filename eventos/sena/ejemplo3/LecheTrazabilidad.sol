@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.5/contracts/token/ERC721/ERC721.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.5/contracts/token/ERC20/IERC20.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.5/contracts/access/Ownable.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.5/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts@4.9.5/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts@4.9.5/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts@4.9.5/access/Ownable.sol";
+import "@openzeppelin/contracts@4.9.5/contracts/utils/Counters.sol";
 
 contract LecheTrazabilidad is ERC721, Ownable {
     using Counters for Counters.Counter;
