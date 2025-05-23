@@ -8,6 +8,8 @@
 * Nombre: LateoCoin 
 * Sigla: PROLATEO
 * Cantidad Inicial: 1 PROLATEO
+* Wei: 1000000000000000000
+* La empresa MilkChain SAS cambiara 1 PROLATEO a 1 COP relacion 1:1 
 
 ##### Empresa: MilkChain SAS
 * Acciones RWA de la empresa MilkChain SAS
@@ -23,3 +25,4 @@ Interaccion con los smart contract y Metamask:
 
 #### Trazabilidad:
 * Creacion Lote 1 Leche Organica de presentacion de 1 Litro
+* Valor de ejemplo 5000 litro de leche
