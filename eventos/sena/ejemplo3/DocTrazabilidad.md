@@ -1,6 +1,6 @@
 # Trazabilidad de una Caja de Leche (1L)  
 
-**Empresa Láctea**: Lácteos del Valle S.A.  
+**Empresa Láctea**: MilkChain SAS  
 **Producto**: Leche UHT Entera (1L)  
 **Lote**: LT-20240515  
 **Fecha de Envasado**: 15/05/2024  
@@ -11,7 +11,7 @@
 - **Proveedor de Leche Cruda**:  
   Hacienda "La Esperanza" (Registro SENASA #HP-1234).  
 - **Ubicación**:  
-  Provincia de Cajamarca, Perú.  
+  Municipio Jamundi, Valle del Cauca, Colombia.  
 - **Fecha de Ordeño**:  
   14/05/2024.  
 - **Cantidad Suministrada**:  
