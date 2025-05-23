@@ -2,9 +2,9 @@
 
 pragma solidity 0.8.18;
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.5/contracts/access/Ownable.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.5/contracts/token/ERC20/ERC20.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.9.5/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts@4.9.5/access/Ownable.sol";
+import "@openzeppelin/contracts@4.9.5/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts@4.9.5/token/ERC20/extensions/ERC20Burnable.sol";
 
 contract Tokenstandar is ERC20, ERC20Burnable, Ownable {
     uint8 private _decimals;
