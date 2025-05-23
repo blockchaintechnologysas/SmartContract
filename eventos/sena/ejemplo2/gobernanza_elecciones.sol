@@ -19,15 +19,17 @@ contract CompanyDAO {
     // Token de gobernanza
     GovernanceToken public governanceToken;
 
-    // Estructuras para la elección
+    // Estructura para candidato
     struct Candidate {
         address wallet;
         uint256 votes;
     }
 
+    // Estructura para posición
     struct Position {
         string title;
-        Candidate[] candidates;
+        mapping(uint256 => Candidate) candidatesMapping; // Usamos mapping en lugar de array
+        uint256 candidatesCount;
         bool electionOpen;
         uint256 lastElectionTime;
         address currentHolder;
@@ -47,34 +49,27 @@ contract CompanyDAO {
     event ElectionStarted(uint256 timestamp);
     event VoteCast(address indexed voter, uint256 positionIndex, address candidate, uint256 votes);
     event ElectionResult(uint256 positionIndex, address winner, uint256 votes);
+    event CandidateProposed(uint256 positionIndex, address candidate);
 
     constructor(address _governanceTokenAddress) {
         governanceToken = GovernanceToken(_governanceTokenAddress);
         
         // Inicializar las posiciones
-        positions.push(Position({
-            title: "Presidente",
-            candidates: new Candidate[](0),
-            electionOpen: false,
-            lastElectionTime: 0,
-            currentHolder: address(0)
-        }));
+        _addPosition("Presidente");
+        _addPosition("Vicepresidente");
+        _addPosition("Fiscal");
+    }
+
+    // Función interna para añadir posiciones
+    function _addPosition(string memory title) internal {
+        Position storage newPosition;
+        newPosition.title = title;
+        newPosition.electionOpen = false;
+        newPosition.lastElectionTime = 0;
+        newPosition.currentHolder = address(0);
+        newPosition.candidatesCount = 0;
         
-        positions.push(Position({
-            title: "Vicepresidente",
-            candidates: new Candidate[](0),
-            electionOpen: false,
-            lastElectionTime: 0,
-            currentHolder: address(0)
-        }));
-        
-        positions.push(Position({
-            title: "Fiscal",
-            candidates: new Candidate[](0),
-            electionOpen: false,
-            lastElectionTime: 0,
-            currentHolder: address(0)
-        }));
+        positions.push(newPosition);
     }
 
     // Modificador para verificar si es socio
@@ -83,13 +78,13 @@ contract CompanyDAO {
         _;
     }
 
-    // Iniciar proceso de elección (puede ser llamado por cualquier socio cuando es tiempo)
+    // Iniciar proceso de elección
     function startElection() public onlyShareholder {
         require(canStartElection(), "No es tiempo de elecciones o ya hay una en curso");
         
         for (uint256 i = 0; i < positions.length; i++) {
             positions[i].electionOpen = true;
-            delete positions[i].candidates;
+            positions[i].candidatesCount = 0; // Resetear contador de candidatos
             positions[i].lastElectionTime = block.timestamp;
         }
         
@@ -100,14 +95,12 @@ contract CompanyDAO {
     function canStartElection() public view returns (bool) {
         if (positions.length == 0) return false;
         
-        // Verificar si ya hay una elección en curso
         for (uint256 i = 0; i < positions.length; i++) {
             if (positions[i].electionOpen) {
                 return false;
             }
         }
         
-        // Verificar si ha pasado el intervalo desde la última elección
         return (block.timestamp - positions[0].lastElectionTime) >= ELECTION_INTERVAL;
     }
 
@@ -117,36 +110,43 @@ contract CompanyDAO {
         require(positions[positionIndex].electionOpen, "Eleccion no esta abierta para esta posicion");
         
         // Verificar que el candidato no haya sido ya propuesto
-        for (uint256 i = 0; i < positions[positionIndex].candidates.length; i++) {
-            require(positions[positionIndex].candidates[i].wallet != candidateWallet, "Candidato ya propuesto");
+        for (uint256 i = 0; i < positions[positionIndex].candidatesCount; i++) {
+            require(
+                positions[positionIndex].candidatesMapping[i].wallet != candidateWallet, 
+                "Candidato ya propuesto"
+            );
         }
         
-        positions[positionIndex].candidates.push(Candidate({
+        uint256 newCandidateIndex = positions[positionIndex].candidatesCount;
+        positions[positionIndex].candidatesMapping[newCandidateIndex] = Candidate({
             wallet: candidateWallet,
             votes: 0
-        }));
+        });
+        positions[positionIndex].candidatesCount++;
+        
+        emit CandidateProposed(positionIndex, candidateWallet);
     }
 
     // Votar por un candidato
-    function vote(uint256 positionIndex, address candidateWallet) public onlyShareholder {
+    function vote(uint256 positionIndex, uint256 candidateIndex) public onlyShareholder {
         require(positionIndex < positions.length, "Posicion invalida");
+        require(candidateIndex < positions[positionIndex].candidatesCount, "Candidato invalido");
         require(positions[positionIndex].electionOpen, "Eleccion no esta abierta para esta posicion");
-        require(block.timestamp - positions[positionIndex].lastElectionTime <= VOTING_DURATION, "Periodo de votacion ha terminado");
+        require(
+            block.timestamp - positions[positionIndex].lastElectionTime <= VOTING_DURATION, 
+            "Periodo de votacion ha terminado"
+        );
         
         uint256 voteWeight = governanceToken.balanceOf(msg.sender);
         require(voteWeight > 0, "No tienes tokens para votar");
         
-        bool candidateFound = false;
-        for (uint256 i = 0; i < positions[positionIndex].candidates.length; i++) {
-            if (positions[positionIndex].candidates[i].wallet == candidateWallet) {
-                positions[positionIndex].candidates[i].votes += voteWeight;
-                candidateFound = true;
-                break;
-            }
-        }
-        
-        require(candidateFound, "Candidato no encontrado");
-        emit VoteCast(msg.sender, positionIndex, candidateWallet, voteWeight);
+        positions[positionIndex].candidatesMapping[candidateIndex].votes += voteWeight;
+        emit VoteCast(
+            msg.sender, 
+            positionIndex, 
+            positions[positionIndex].candidatesMapping[candidateIndex].wallet, 
+            voteWeight
+        );
     }
 
     // Finalizar elección y declarar ganadores
@@ -154,15 +154,14 @@ contract CompanyDAO {
         require(canFinalizeElection(), "No se puede finalizar la eleccion aun");
         
         for (uint256 i = 0; i < positions.length; i++) {
-            if (positions[i].candidates.length > 0) {
-                address winner = positions[i].candidates[0].wallet;
-                uint256 maxVotes = positions[i].candidates[0].votes;
+            if (positions[i].candidatesCount > 0) {
+                address winner = positions[i].candidatesMapping[0].wallet;
+                uint256 maxVotes = positions[i].candidatesMapping[0].votes;
                 
-                // Encontrar el candidato con más votos
-                for (uint256 j = 1; j < positions[i].candidates.length; j++) {
-                    if (positions[i].candidates[j].votes > maxVotes) {
-                        maxVotes = positions[i].candidates[j].votes;
-                        winner = positions[i].candidates[j].wallet;
+                for (uint256 j = 1; j < positions[i].candidatesCount; j++) {
+                    if (positions[i].candidatesMapping[j].votes > maxVotes) {
+                        maxVotes = positions[i].candidatesMapping[j].votes;
+                        winner = positions[i].candidatesMapping[j].wallet;
                     }
                 }
                 
@@ -177,21 +176,32 @@ contract CompanyDAO {
     function canFinalizeElection() public view returns (bool) {
         if (positions.length == 0) return false;
         
-        // Verificar que todas las elecciones estén abiertas
         for (uint256 i = 0; i < positions.length; i++) {
             if (!positions[i].electionOpen) {
                 return false;
             }
         }
         
-        // Verificar que ha pasado el tiempo de votación
         return (block.timestamp - positions[0].lastElectionTime) > VOTING_DURATION;
     }
 
     // Obtener información de candidatos para una posición
-    function getCandidates(uint256 positionIndex) public view returns (Candidate[] memory) {
+    function getCandidate(uint256 positionIndex, uint256 candidateIndex) 
+        public 
+        view 
+        returns (address wallet, uint256 votes) 
+    {
         require(positionIndex < positions.length, "Posicion invalida");
-        return positions[positionIndex].candidates;
+        require(candidateIndex < positions[positionIndex].candidatesCount, "Candidato invalido");
+        
+        Candidate storage candidate = positions[positionIndex].candidatesMapping[candidateIndex];
+        return (candidate.wallet, candidate.votes);
+    }
+
+    // Obtener número de candidatos para una posición
+    function getCandidatesCount(uint256 positionIndex) public view returns (uint256) {
+        require(positionIndex < positions.length, "Posicion invalida");
+        return positions[positionIndex].candidatesCount;
     }
 
     // Verificar si una dirección es actual miembro de la junta
