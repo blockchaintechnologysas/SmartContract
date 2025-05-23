@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wallet Web3 - Lactocoin</title>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+</head>
+<body>
+  <h1>Wallet Web3 - Lactocoin</h1>
+  <button onclick="connectWallet()">Conectar Wallet</button>
+  <p id="walletAddress">Wallet no conectada</p>
+
+  <hr/>
+
+  <div>
+    <h3>Balance</h3>
+    <button onclick="getBalance()">Ver Balance</button>
+    <p id="balance"></p>
+  </div>
+
+  <hr/>
+
+  <div>
+    <h3>Transferir Tokens</h3>
+    <input id="to" placeholder="Dirección destino">
+    <input id="amount" placeholder="Cantidad">
+    <button onclick="transfer()">Transferir</button>
+  </div>
+
+  <hr/>
+
+  <div>
+    <h3>Mint (solo owner)</h3>
+    <input id="mintTo" placeholder="Dirección destino">
+    <input id="mintAmount" placeholder="Cantidad a mintear">
+    <button onclick="mint()">Mint</button>
+  </div>
+
+  <div>
+    <h3>Burn</h3>
+    <input id="burnAmount" placeholder="Cantidad a quemar">
+    <button onclick="burn()">Burn</button>
+  </div>
+
+  <script>
+    const CONTRACT_ADDRESS = "TU_DIRECCION_DEL_CONTRATO"; // <- reemplaza aquí
+
+    const ABI = [  // Reemplaza con el ABI completo generado por tu compilador o en Remix
+      "function name() view returns (string)",
+      "function symbol() view returns (string)",
+      "function balanceOf(address) view returns (uint)",
+      "function transfer(address to, uint amount) returns (bool)",
+      "function mint(address to, uint amount)",
+      "function burn(uint amount)",
+      "function decimals() view returns (uint8)",
+    ];
+
+    let provider;
+    let signer;
+    let contract;
+    let userAddress;
+
+    async function connectWallet() {
+      if (window.ethereum) {
+        provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        signer = provider.getSigner();
+        userAddress = await signer.getAddress();
+        document.getElementById("walletAddress").innerText = "Conectado: " + userAddress;
+
+        contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
+      } else {
+        alert("Instala MetaMask para continuar");
+      }
+    }
+
+    async function getBalance() {
+      const decimals = await contract.decimals();
+      const balance = await contract.balanceOf(userAddress);
+      document.getElementById("balance").innerText = ethers.utils.formatUnits(balance, decimals);
+    }
+
+    async function transfer() {
+      const to = document.getElementById("to").value;
+      const amount = document.getElementById("amount").value;
+      const decimals = await contract.decimals();
+      const tx = await contract.transfer(to, ethers.utils.parseUnits(amount, decimals));
+      await tx.wait();
+      alert("Transferencia exitosa");
+    }
+
+    async function mint() {
+      const to = document.getElementById("mintTo").value;
+      const amount = document.getElementById("mintAmount").value;
+      const decimals = await contract.decimals();
+      const tx = await contract.mint(to, ethers.utils.parseUnits(amount, decimals));
+      await tx.wait();
+      alert("Mint exitoso");
+    }
+
+    async function burn() {
+      const amount = document.getElementById("burnAmount").value;
+      const decimals = await contract.decimals();
+      const tx = await contract.burn(ethers.utils.parseUnits(amount, decimals));
+      await tx.wait();
+      alert("Burn exitoso");
+    }
+  </script>
+</body>
+</html>
