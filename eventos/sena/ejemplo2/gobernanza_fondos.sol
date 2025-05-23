@@ -28,7 +28,7 @@ contract DAO is Ownable {
 
     mapping(uint256 => Proposal) public proposals;
     uint256 public proposalCount;
-    uint256 public votingDuration = 3 days;
+    uint256 public votingDuration = 1 days;
 
     EnumerableSet.AddressSet private members;
 
