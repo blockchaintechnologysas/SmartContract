@@ -1,1 +1,102 @@
-1
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DAO Fondos</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+</head>
+<body>
+  <h2>DAO Fondos</h2>
+
+  <button onclick="connectWallet()">Conectar Wallet</button>
+  <p id="walletAddress"></p>
+
+  <hr>
+
+  <h3>Crear Propuesta</h3>
+  <input id="description" placeholder="Descripción" />
+  <input id="recipient" placeholder="Dirección del destinatario" />
+  <input id="amount" placeholder="Cantidad en ETH" type="number" />
+  <button onclick="createProposal()">Crear</button>
+
+  <hr>
+
+  <h3>Propuestas</h3>
+  <button onclick="loadProposals()">Cargar propuestas</button>
+  <div id="proposalsList"></div>
+
+  <script>
+    const contractAddress = "DIRECCION_DEL_CONTRATO"; // reemplaza con la dirección real
+    const abi = [/* Pega aquí el ABI del contrato DAO */];
+
+    let web3;
+    let account;
+    let dao;
+
+    async function connectWallet() {
+      if (window.ethereum) {
+        web3 = new Web3(window.ethereum);
+        await window.ethereum.request({ method: "eth_requestAccounts" });
+        const accounts = await web3.eth.getAccounts();
+        account = accounts[0];
+        document.getElementById("walletAddress").innerText = "Conectado: " + account;
+        dao = new web3.eth.Contract(abi, contractAddress);
+      } else {
+        alert("MetaMask no está instalado");
+      }
+    }
+
+    async function createProposal() {
+      const description = document.getElementById("description").value;
+      const recipient = document.getElementById("recipient").value;
+      const amount = document.getElementById("amount").value;
+
+      try {
+        await dao.methods.createProposal(description, recipient, amount).send({ from: account });
+        alert("Propuesta creada");
+      } catch (error) {
+        console.error(error);
+        alert("Error al crear la propuesta");
+      }
+    }
+
+    async function loadProposals() {
+      const proposalsDiv = document.getElementById("proposalsList");
+      proposalsDiv.innerHTML = "";
+
+      const count = await dao.methods.proposalCount().call();
+      for (let i = 1; i <= count; i++) {
+        const proposal = await dao.methods.proposals(i).call();
+        const voted = await dao.methods.hasVoted(i, account).call();
+        const votes = await dao.methods.getProposalVotes(i).call();
+
+        proposalsDiv.innerHTML += `
+          <div style="border:1px solid black; margin:10px; padding:10px;">
+            <p><strong>ID:</strong> ${proposal.id}</p>
+            <p><strong>Descripción:</strong> ${proposal.description}</p>
+            <p><strong>Destinatario:</strong> ${proposal.recipient}</p>
+            <p><strong>Cantidad:</strong> ${proposal.amount} ETH</p>
+            <p><strong>Votos a favor:</strong> ${votes[0]}</p>
+            <p><strong>Votos en contra:</strong> ${votes[1]}</p>
+            <p><strong>Ya votaste:</strong> ${voted ? "Sí" : "No"}</p>
+            ${!voted ? `
+              <button onclick="vote(${proposal.id}, true)">Votar a favor</button>
+              <button onclick="vote(${proposal.id}, false)">Votar en contra</button>
+            ` : ""}
+          </div>
+        `;
+      }
+    }
+
+    async function vote(id, support) {
+      try {
+        await dao.methods.vote(id, support).send({ from: account });
+        alert("Voto registrado");
+        loadProposals();
+      } catch (err) {
+        console.error(err);
+        alert("Error al votar");
+      }
+    }
+  </script>
+</body>
+</html>
