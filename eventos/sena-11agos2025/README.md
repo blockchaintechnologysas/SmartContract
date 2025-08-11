@@ -9,5 +9,5 @@
 * Sigla: MV
 * Cantidad Inicial: 1 MV
 * Wei: 1000000000000000000
-* La Merca Valle Suminstros SAS cambiara 1 MV a 1 COP relacion 1:1
+* La Empresa Merca Valle Suminstros SAS cambiara 1 MV a 1 COP relacion 1:1
 
