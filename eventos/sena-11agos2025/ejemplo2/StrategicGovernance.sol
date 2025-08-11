@@ -9,7 +9,7 @@ contract DecisionGovernance is Ownable {
     using EnumerableSet for EnumerableSet.AddressSet;
     
     address public btAiToken;         // Token usado para gobernanza
-    uint256 public votingPeriod;      // En segundos
+    uint256 public votingPeriod;      // En segundos 1 → votingPeriod = 86400
     
     struct Proposal {
         uint256 id;
