@@ -1,6 +1,6 @@
-# Trazabilidad de una Caja de Leche (1L)  
+# Trazabilidad 1 Libra de Tomate  
 
-**Empresa Láctea**: Merca Valle Suminstros SAS  
+**Empresa**: Merca Valle Suminstros SAS  
 **Producto**: Tomate Chonto (1 lb)  
 **Lote**: TC-20240810  
 **Fecha de Envasado**: 10/08/2024  
@@ -8,7 +8,7 @@
 ---
 
 ## 1. Origen de la Materia Prima  
-- **Proveedor de Leche Cruda**:  
+- **Proveedor**:  
   Finca “El Amanecer” (Registro ICA #FA-4587).  
 - **Ubicación**:  
   Corregimiento La Habana, Municipio Buga, Valle del Cauca, Colombia. 
