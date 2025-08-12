@@ -71,3 +71,17 @@
 ]
 ```
 
+### setVenta
+``tokenId = 0``
+```
+[
+  "Ana López (tarjeta fidelización #456321)",
+
+  "11/08/2024",
+
+  "Autoservicio",
+
+  "COP 3.500"
+
+]
+```
