@@ -26,3 +26,19 @@
   
 ]
 ```
+### setProcesamiento
+``tokenId = 0``
+```
+[
+  "Centro de Acopio y Empaque Buga (INVIMA #CE-9087)",
+
+  "Recepción y pesada; lavado con agua potable; desinfección 100 ppm por 2 minutos; clasificación por calibre; secado por aire; empaque 1 lb (bolsa grado alimenticio).",
+
+  "Selladora #S-12",
+
+  "08:15 a 09:40",
+
+  "10/08/2024"
+]
+```
+
