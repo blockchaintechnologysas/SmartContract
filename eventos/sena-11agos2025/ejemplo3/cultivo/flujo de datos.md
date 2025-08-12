@@ -43,3 +43,19 @@
 ]
 ```
 
+### setDistribucion
+``tokenId = 0``
+```
+[
+  "Cámara fría 10-12°C; humedad relativa 85%",
+
+  "Camión refrigerado #REF-325 (10°C)",
+
+  "Plaza de Mercado y Supermercado Frescampo (Buga)",
+
+  "10/08/2024"
+
+]
+```
+
+
