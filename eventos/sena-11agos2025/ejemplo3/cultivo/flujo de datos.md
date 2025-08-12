@@ -85,3 +85,22 @@
 
 ]
 ```
+
+### setDocumentos
+``tokenId = 0``
+```
+[
+  "Registro de cosecha: Productor → Centro de Empaque (ipfs://REG_COSECHA_TC-20240809)",
+
+  "Certificado análisis de residuos – Lab. autorizado ICA (ipfs://CERT_RESIDUOS_TC-20240809)",
+
+  "Reporte de producción – lote TC-20240810 (ipfs://REP_PROD_TC-20240810)",
+
+  "Hoja de ruta transporte N° Guía 102-2024",
+
+  "Factura electrónica #F-002-254 (venta a supermercado)",
+
+  "ISO 22005; GlobalG.A.P."
+
+]
+```
