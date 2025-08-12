@@ -58,4 +58,16 @@
 ]
 ```
 
+### setPuntoDeVenta
+``tokenId = 0``
+```
+[
+  "Frescampo (Sucursal Centro)",
+
+  "7894561230017",
+
+  "17/08/2024"
+
+]
+```
 
