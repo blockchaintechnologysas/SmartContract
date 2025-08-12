@@ -1,7 +1,7 @@
 ### SetLote
 ``tokenId = 0``
 
-`[
+```[
   "Merca Valle Suministros SAS",
   
   "Tomate Chonto (1 lb)",
@@ -24,4 +24,4 @@
   
   "Sin manchas ni plagas visibles. Residuos dentro de límites (Res. ICA 2906/2007)."
   
-]`
+]```
