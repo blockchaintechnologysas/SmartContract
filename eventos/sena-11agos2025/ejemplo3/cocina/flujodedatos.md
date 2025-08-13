@@ -38,3 +38,19 @@
 Nota 
 - "Direccion del NFT es 0x"
 - 0 es la posicion del NFT
+
+### Recepción en restaurante (control de calidad)
+## setRecepcion
+``regId = 0``
+
+```
+[
+  "Color uniforme, sin daños mecánicos.",
+
+  "1 libra exacta (0,45 kg).",
+
+  "Cámara refrigerada a 8°C.",
+
+  "11/08/2024"
+]
+```
