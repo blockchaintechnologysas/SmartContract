@@ -30,8 +30,11 @@
   
   "Vehículo refrigerado 10°C",
   
-  "0xDA07165D4f7c84EEEfa7a4Ff439e039B7925d3dF",  
+  "0x",  
   
   0                           
 ]
 ```
+Nota 
+- "Direccion del NFT es 0x"
+- 0 es la posicion del NFT
