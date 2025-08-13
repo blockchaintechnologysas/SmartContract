@@ -106,3 +106,10 @@ Nota
   "Comanda del cliente: Orden #A-215"
 ]
 ```
+
+# CONSULTA
+### verRegistro
+``regId = 0``
+
+- Puedes repetir el flujo (1 → 6) para más platos/lotes internos. Cada crearRegistro genera un nuevo regId (0, 1, 2, …).
+- Si varios platos comparten el mismo tomate de origen, reutiliza los mismos textos del paso 2 y/o enlaza al mismo NFT tokenId.
