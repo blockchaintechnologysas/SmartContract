@@ -13,7 +13,8 @@
 
 ### Origen del ingrediente principal
 ``regId = 0``
-``
+
+```
 [
   "Tomate Chonto (1 lb)",
   
@@ -33,4 +34,4 @@
   
   0                           
 ]
-``
+```
