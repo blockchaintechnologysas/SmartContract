@@ -55,3 +55,19 @@ Nota
   "11/08/2024"
 ]
 ```
+### Proceso de elaboración culinaria
+## setElaboracion
+``regId = 0``
+```
+[
+  "12/08/2024 (9:00 am)",
+
+  "Cocina Principal – Chef encargado: María Gómez",
+
+  "Lavado y desinfección (100 ppm, 2 min); pelado y troceado; sofrito con cebolla y ajo; cocción con caldo de verduras 20 min; licuado y filtrado; rectificación de sal y pimienta.",
+
+  "CT-20240812-EN",
+
+  "Olla industrial #OI-22, licuadora #BL-05"
+]
+```
