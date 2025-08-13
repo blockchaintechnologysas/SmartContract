@@ -71,3 +71,38 @@ Nota
   "Olla industrial #OI-22, licuadora #BL-05"
 ]
 ```
+
+### Servicio al cliente
+## setServicio
+``regId = 0``
+
+```
+[
+  "12/08/2024 – 1:15 pm",
+
+  "#12",
+
+  "Solicitud directa del menú como entrada",
+
+  "Servida caliente (65°C), acompañada de pan artesanal"
+
+]
+```
+
+### Documentos clave de la etapa
+## setDocumentos
+``regId = 0``
+
+```
+[
+  "Factura de compra del tomate: Frescampo → Restaurante Sabores del Valle",
+
+  "Registro de trazabilidad del tomate: Lote TC-20240810",
+
+  "Hoja de producción interna: Lote CT-20240812-EN",
+
+  "Control de BPM: Registro diario de limpieza y temperatura",
+
+  "Comanda del cliente: Orden #A-215"
+]
+```
