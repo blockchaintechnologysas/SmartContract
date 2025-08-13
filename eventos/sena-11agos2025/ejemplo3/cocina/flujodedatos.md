@@ -12,6 +12,7 @@
 ```
 
 ### Origen del ingrediente principal
+## setOrigen
 ``regId = 0``
 
 ```
